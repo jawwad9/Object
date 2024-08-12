@@ -13,9 +13,14 @@ function renderItem() {
     div.innerHTML = ``
     arr.map((item) => {
         div.innerHTML += `
-        <h1>${item.inputName} </h1>
-        <h1>${item.inputcash} </h1>
-        <h1>${item.inputdec} </h1>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Title: ${item.inputName}</h5>
+          <p class="card-text">Dec: ${item.inputdec}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <h1 class="list-group-item">Price: ${item.inputcash}</h1>
+      </div>
     `
     })
 }
