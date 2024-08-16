@@ -1,6 +1,6 @@
 import {onAuthStateChanged , signOut } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import { auth, db } from "./config.js";
-import { addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
+import { addDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
 
 // import { addDoc, collection, getDocs, doc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
 
@@ -37,8 +37,29 @@ logout.addEventListener('click', ()=>{
 const title = document.querySelector('#title')
 const description = document.querySelector('#description')
 const formAdd = document.querySelector('#form-add')
+const div = document.querySelector('#div')
 
-const arr = [];
+
+
+
+async function getData(){
+  const arr = []
+  const querySnapshot = await getDocs(collection(db, "todos"));
+querySnapshot.forEach((doc) => {
+  arr.push(doc.data());
+});
+console.log(arr);
+arr.map((item)=>{
+  div.innerHTML += `
+  <h1>${item.title}</h1>
+  <h1>${item.description}</h1>
+
+
+  `
+})
+}
+getData()
+
 
 formAdd.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -56,6 +77,24 @@ formAdd.addEventListener("submit", async (event) => {
       console.error("Error adding document: ", e);
     }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
